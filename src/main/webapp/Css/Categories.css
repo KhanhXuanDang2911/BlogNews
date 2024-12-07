@@ -1,0 +1,32 @@
+.btn__add-categories{
+    background-color: green;
+}
+.search-form{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.search-form input{
+    outline: none;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.search-form button[type=submit]{
+    margin: 8px 0 !important;
+    height: 44px;
+    display: inline-block;
+    outline: none;
+    border: none;
+    padding: 0 25px;
+    background-color: green;
+    color: #FFF;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+.manage-title-search{
+    align-items: center;
+    width: 40%;
+    min-width: 300px;
+}

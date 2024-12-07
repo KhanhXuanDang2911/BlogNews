@@ -1,0 +1,160 @@
+:root{
+    --color-1: #0c2e60;
+    --color-3: #ffc107;
+}
+
+.manage-block{
+    background-color: #ffc107;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.manage-user__title{
+    font-size: 3rem !important;
+}
+.fa-plus{
+    margin-right: 8px;
+    padding: 5px;
+    background: #FFF;
+    border-radius: 50%;
+    color: black;
+}
+.btn-dashboard{
+    display: inline-block;
+    padding: 10px 10px;
+    color: #FFF;
+    font-size: 1.4rem;
+    text-transform: capitalize;
+}
+.btn-dashboard:hover{
+    opacity: 0.85;
+}
+.btn__add-users{
+    background-color: green;
+}
+
+/* table */
+table.custom-table {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-collapse: collapse;
+    border-width: 1px;
+    border-color: #7EA8F8;
+    border-style: ridge;
+    color: #000000;
+    font-size: 16px;
+    table-layout: fixed;
+}
+
+table.custom-table td, table.custom-table th {
+    border-width: 1px;
+    border-color: #7EA8F8;
+    border-style: ridge;
+    padding: 10px 5px;
+    max-width: 130px; /* Đặt chiều rộng tối đa của ô bảng */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+table.custom-table th{
+    background-color: #7EA8F8;
+    font-weight: 500;
+}
+table.custom-table td{
+    font-size: 12px;
+}
+table.custom-table tr:hover{
+    background-color: #e9e7e7;
+}
+table.custom-table thead {
+    background-color: #7EA8F8;
+}
+
+/*  */
+.table .fa-pen, .table .fa-trash{
+    padding: 0 8px;
+    font-size: 16px;
+}
+.table .fa-pen{
+    color: #ffc71f;
+}
+.table .fa-trash{
+    color: #f5554a;
+}
+/* custom pagination */
+.clearfix{
+    padding: 15px 5px;
+}
+.pagination {
+    float: right;
+    margin: 0 0 5px;
+}
+.pagination li a {
+    border: none;
+    font-size: 13px;
+    min-width: 30px;
+    min-height: 30px;
+    color: #5b5858;
+    margin: 0 2px;
+    line-height: 30px;
+    border-radius: 2px !important;
+    text-align: center;
+    padding: 0 6px;
+}
+.pagination li a:hover {
+    color: #666;
+}
+.pagination li.active a, .pagination li.active a.page-link {
+    background: #03A9F4;
+}
+.pagination li.active a:hover {
+    background: #0397d6;
+}
+.pagination li i {
+    font-size: 16px;
+    padding-top: 6px
+}
+.hint-text {
+    float: left;
+    margin-top: 10px;
+    font-size: 13px;
+}
+.hint-text b{
+    font-weight: 600;
+    padding: 0;
+}
+
+
+/* MODAL DELETE */
+.btn__modal{
+    background-color: transparent !important;
+    border: none !important;
+}
+.modal__delete .modal-title{
+    font-size: 2rem;
+    font-weight: 600;
+}
+.modal__delete .modal-body p{
+    padding: 5px 0;
+    color: #2f3031;
+    font-size: 2rem;
+    font-weight: 500;
+}
+.modal__delete .modal-body{
+    text-align: center;
+}
+.modal__delete .fa-triangle-exclamation{
+    color: #ffc71f;
+    font-size: 70px;
+}
+.modal__delete .modal-footer{
+    text-align: center;
+    display: block;
+}
+.modal__delete .modal-footer .btn{
+    min-width: 80px !important;
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+}
