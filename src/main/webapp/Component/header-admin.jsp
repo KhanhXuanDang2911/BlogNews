@@ -21,10 +21,10 @@
     <link rel="stylesheet" href="../Css/reset.css">
     <!-- font-awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="../Css/header-admin.css">
-    <link rel="stylesheet" href="../Css/users.css">
-    <link rel="stylesheet" href="../Css/AddUser.css">
-    <link rel="stylesheet" href="../Css/Categories.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/header-admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/users.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/AddUser.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/Categories.css">
 </head>
 
 <body>
@@ -49,10 +49,10 @@
                 <a href="${pageContext.request.contextPath}/Users" class="nav__link"><i class="fa-solid fa-user"></i>Users</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/News" class="nav__link"><i class="fa-solid fa-file"></i>News</a>
+                <a href="${pageContext.request.contextPath}/ListNews" class="nav__link"><i class="fa-solid fa-file"></i>News</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/Categories" class="nav__link"><i class="fa-solid fa-book"></i>Categories</a>
+                <a href="${pageContext.request.contextPath}/ListCategories" class="nav__link"><i class="fa-solid fa-book"></i>Categories</a>
             <li>
                 <a href="${pageContext.request.contextPath}/Logout" class="nav__link"><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
             </li>

@@ -79,22 +79,22 @@
             <h5 class="mb-4 text-white text-uppercase font-weight-bold">Flickr Photos</h5>
             <div class="row">
                 <div class="col-4 mb-3">
-                    <a href=""><img class="w-100" src="../Images/news-110x110-1.jpg" alt=""></a>
+                    <a href=""><img class="w-100" src="<%=request.getContextPath()%>/Images/news-110x110-1.jpg" alt=""></a>
                 </div>
                 <div class="col-4 mb-3">
-                    <a href=""><img class="w-100" src="../Images/news-110x110-2.jpg" alt=""></a>
+                    <a href=""><img class="w-100" src="<%=request.getContextPath()%>/Images/news-110x110-2.jpg" alt=""></a>
                 </div>
                 <div class="col-4 mb-3">
-                    <a href=""><img class="w-100" src="../Images/news-110x110-3.jpg" alt=""></a>
+                    <a href=""><img class="w-100" src="<%=request.getContextPath()%>/Images/news-110x110-3.jpg" alt=""></a>
                 </div>
                 <div class="col-4 mb-3">
-                    <a href=""><img class="w-100" src="../Images/news-110x110-4.jpg" alt=""></a>
+                    <a href=""><img class="w-100" src="<%=request.getContextPath()%>/Images/news-110x110-4.jpg" alt=""></a>
                 </div>
                 <div class="col-4 mb-3">
-                    <a href=""><img class="w-100" src="../Images/news-110x110-5.jpg" alt=""></a>
+                    <a href=""><img class="w-100" src="<%=request.getContextPath()%>/Images/news-110x110-5.jpg" alt=""></a>
                 </div>
                 <div class="col-4 mb-3">
-                    <a href=""><img class="w-100" src="../Images/news-110x110-1.jpg" alt=""></a>
+                    <a href=""><img class="w-100" src="<%=request.getContextPath()%>/Images/news-110x110-1.jpg" alt=""></a>
                 </div>
             </div>
         </div>
@@ -115,11 +115,11 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="../lib/easing/easing.min.js"></script>
-<script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="<%=request.getContextPath()%>/lib/easing/easing.min.js"></script>
+<script src="<%=request.getContextPath()%>/lib/owlcarousel/owl.carousel.min.js"></script>
 
 <!-- Template Javascript -->
-<script src="../JavaScript/main.js"></script>
+<script src="<%=request.getContextPath()%>/JavaScript/main.js"></script>
 </body>
 
 </html>
