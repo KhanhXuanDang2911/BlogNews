@@ -13,8 +13,7 @@ public class UserBO {
         if (user.getId() != null && findUserById(user.getId()) != null){
             return false;
         }
-        userDAO.addUser(user);
-        return true;
+        return userDAO.addUser(user);
     }
 
     public boolean updateUser(User user) {
@@ -23,8 +22,16 @@ public class UserBO {
             return false;
         }
 
-        userDAO.updateUser(user);
-        return true;
+        return userDAO.updateUser(user);
+    }
+
+    public boolean updateProfile(User user) {
+        User existingUser = findUserById(user.getId());
+        if (existingUser == null) {
+            return false;
+        }
+
+        return userDAO.updateProfile(user);
     }
 
     public boolean deleteUser(long userId) {
@@ -33,11 +40,13 @@ public class UserBO {
             return false;
         }
 
-        userDAO.deleteUser(userId);
-        return true;
+        return userDAO.deleteUser(userId);
     }
 
     public List<User> searchUser(String name) {
+        if (name == null) {
+            name = "";
+        }
         return userDAO.searchUserByName(name);
     }
 

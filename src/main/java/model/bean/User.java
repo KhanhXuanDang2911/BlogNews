@@ -7,24 +7,26 @@ public class User {
     private String username;
     private String password;
     private String name;
+    private String phone;
+    private String email; // Added email field
     private Role role;
     private boolean isActive;
     private String avatar;
 
-    // Constructors
     public User() {}
 
-    public User(Long id, String username, String password, String name, Role role, boolean isActive, String avatar) {
+    public User(Long id, String username, String password, String name, String phone, String email, Role role, boolean isActive, String avatar) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.name = name;
+        this.phone = phone;
+        this.email = email; // Initialize email
         this.role = role;
         this.isActive = isActive;
         this.avatar = avatar;
-        this.name = name;
     }
 
-    // Getters và Setters
     public Long getId() {
         return id;
     }
@@ -47,6 +49,30 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email; // Getter for email
+    }
+
+    public void setEmail(String email) {
+        this.email = email; // Setter for email
     }
 
     public Role getRole() {
@@ -73,14 +99,6 @@ public class User {
         this.avatar = avatar;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -88,6 +106,8 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' + // Include email in the string
                 ", role=" + role +
                 ", isActive=" + isActive +
                 ", avatar='" + avatar + '\'' +

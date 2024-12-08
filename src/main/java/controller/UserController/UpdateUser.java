@@ -31,14 +31,16 @@ public class UpdateUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             long userId = Long.parseLong(request.getParameter("userId"));
-            String username = request.getParameter("username");
+//            String username = request.getParameter("username");
             String password = request.getParameter("password");
             String name = request.getParameter("name");
             String role = request.getParameter("role");
             boolean isActive = Boolean.parseBoolean(request.getParameter("is_active"));
             String avatar = request.getParameter("avatar");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
 
-            User user = new User(userId, username, password, name, Role.valueOf(role), isActive, avatar);
+            User user = new User(userId, null, password, name, phone , email ,  Role.valueOf(role), isActive, avatar);
 
             boolean isSuccess = userBO.updateUser(user);
             if (isSuccess) {

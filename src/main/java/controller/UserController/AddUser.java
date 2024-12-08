@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.bean.User;
 import model.bean.enums.Role;
 import model.bo.UserBO;
+import util.MD5;
 
 import java.io.IOException;
 
@@ -21,19 +22,23 @@ public class AddUser extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
+        String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         String name = request.getParameter("name");
         String role = request.getParameter("role");
-        boolean isActive = Boolean.parseBoolean(request.getParameter("is_active"));
+        boolean isActive = true;
         String avatar = request.getParameter("avatar");
+        String email = request.getParameter("email");
 
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(MD5.getMD5(password));
         user.setName(name);
         user.setRole(Role.valueOf(role));
         user.setActive(isActive);
         user.setAvatar(avatar);
+        user.setPhone(phone);
+        user.setEmail(email);
 
         try {
             boolean isSuccess = userBO.addUser(user);

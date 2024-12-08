@@ -112,29 +112,26 @@
             <div class="card mb-4">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
-                    <form>
+                    <form method="POST" action="<%=request.getContextPath()%>/UpdateProfile">
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (first name)-->
                             <div class="col-md-12">
                                 <label class="small mb-1" for="inputFirstName">Full name</label>
-                                <input class="form-control" id="inputFirstName" type="text"
-                                       placeholder="Enter your first name" value="Valerie">
+                                <input class="form-control" name="name" type="text" id="inputFirstName">
                             </div>
                         </div>
                         <!-- Form Group (email address)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input class="form-control" id="inputEmailAddress" type="email"
-                                   placeholder="Enter your email address" value="name@example.com">
+                            <input class="form-control" id="inputEmailAddress" type="email" name="email">
                         </div>
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (phone number)-->
                             <div class="col-md-12">
                                 <label class="small mb-1" for="inputPhone">Phone number</label>
-                                <input class="form-control" id="inputPhone" type="tel"
-                                       placeholder="Enter your phone number" value="555-123-4567">
+                                <input class="form-control" id="inputPhone" type="tel" name="phone">
                             </div>
                         </div>
                         <!-- Save changes button-->

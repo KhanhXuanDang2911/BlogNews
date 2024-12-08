@@ -103,24 +103,24 @@
             <div class="card mb-4">
                 <div class="card-header">Change Password</div>
                 <div class="card-body">
-                    <form>
+                    <form action="<%=request.getContextPath()%>/ChangePassword" method="POST">
                         <!-- Form Group (current password)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="currentPassword">Current Password</label>
                             <input class="form-control" id="currentPassword" type="password"
-                                   placeholder="Enter current password">
+                                   placeholder="Enter current password" name="currentPassword">
                         </div>
                         <!-- Form Group (new password)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="newPassword">New Password</label>
                             <input class="form-control" id="newPassword" type="password"
-                                   placeholder="Enter new password">
+                                   placeholder="Enter new password" name="newPassword">
                         </div>
                         <!-- Form Group (confirm password)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="confirmPassword">Confirm Password</label>
                             <input class="form-control" id="confirmPassword" type="password"
-                                   placeholder="Confirm new password">
+                                   placeholder="Confirm new password" name="confirmPassword">
                         </div>
                         <button class="btn btn-primary" type="submit">Save</button>
                     </form>
