@@ -1,31 +1,34 @@
+<%@ page import="model.bean.News" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.bean.Category" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <jsp:include page="../Component/header.jsp"/>
 <!-- News With Sidebar Start -->
 <div class="container-fluid" style="margin-top: 70px">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
+                <%
+                     News news = (News) request.getAttribute("news");
+                     List<News> listNews = (List<News>) request.getAttribute("listNews");
+                     List<Category> listCategories = (List<Category>) request.getAttribute("listCategories");
+                %>
                 <!-- News Detail Start -->
                 <div class="position-relative mb-3">
-                    <img class="img-fluid w-100" src="../Images/news-700x435-1.jpg" style="object-fit: cover;">
+                    <img class="img-fluid w-100" src="<%=request.getContextPath()%><%=news.getImage()%>" style="object-fit: cover;">
                     <div class="bg-white border border-top-0 p-4">
                         <div class="mb-3">
                             <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                               href="">Business</a>
-                            <a class="text-body" href="">Jan 01, 2045</a>
+                               href=""><%=news.getCategory().getName()%></a>
+                            <%
+                                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                                String formattedDate = formatter.format(news.getPublishedAt());
+                            %>
+                            <a class="text-body" href=""><%=formattedDate%></a>
                         </div>
-                        <h1 class="mb-3 text-secondary text-uppercase font-weight-bold">Lorem ipsum dolor sit amet elit vitae porta diam...</h1>
-                        <p>Sadipscing labore amet rebum est et justo gubergren. Et eirmod ipsum sit diam ut
-                            magna lorem. Nonumy vero labore lorem sanctus rebum et lorem magna kasd, stet
-                            amet magna accusam consetetur eirmod. Kasd accusam sit ipsum sadipscing et at at
-                            sanctus et. Ipsum sit gubergren dolores et, consetetur justo invidunt at et
-                            aliquyam ut et vero clita. Diam sea sea no sed dolores diam nonumy, gubergren
-                            sit stet no diam kasd vero.</p>
-                        <p>Voluptua est takimata stet invidunt sed rebum nonumy stet, clita aliquyam dolores
-                            vero stet consetetur elitr takimata rebum sanctus. Sit sed accusam stet sit
-                            nonumy kasd diam dolores, sanctus lorem kasd duo dolor dolor vero sit et. Labore
-                            ipsum duo sanctus amet eos et. Consetetur no sed et aliquyam ipsum justo et,
-                            clita lorem sit vero amet amet est dolor elitr, stet et no diam sit. Dolor erat
-                            justo dolore sit invidunt.</p>
+                        <h1 class="mb-3 text-secondary text-uppercase font-weight-bold"><%=news.getTitle()%></h1>
+                        <%=news.getContent()%>
+
                     </div>
                     <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
                         <div class="d-flex align-items-center">
@@ -92,71 +95,25 @@
                         <h4 class="m-0 text-uppercase font-weight-bold">Trending News</h4>
                     </div>
                     <div class="bg-white border border-top-0 p-3">
+                        <% for (News item : listNews) {
+                            SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+                            String formattedDate1 = formatter1.format(item.getPublishedAt());
+                        %>
                         <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                            <img class="img-fluid" src="../Images/news-110x110-1.jpg" alt="">
+                            <img class="img-fluid" src="<%=request.getContextPath()%><%=item.getImage()%>" alt="#"
+                                style="width: 100px; height:100%; object-fit: cover"
+                            >
                             <div
                                     class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                 <div class="mb-2">
                                     <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                                       href="">Business</a>
-                                    <a class="text-body" href=""><small>Jan 01, 2045</small></a>
+                                       href=""><%=item.getCategory().getName()%></a>
+                                    <a class="text-body" href=""><small><%=formattedDate1%></small></a>
                                 </div>
-                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum
-                                    dolor sit amet elit...</a>
+                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="<%=request.getContextPath()%>/NewsDetail?id_news=<%=item.getId()%>"><%=item.getTitle()%></a>
                             </div>
                         </div>
-                        <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                            <img class="img-fluid" src="../Images/news-110x110-2.jpg" alt="">
-                            <div
-                                    class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                <div class="mb-2">
-                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                                       href="">Business</a>
-                                    <a class="text-body" href=""><small>Jan 01, 2045</small></a>
-                                </div>
-                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum
-                                    dolor sit amet elit...</a>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                            <img class="img-fluid" src="../Images/news-110x110-3.jpg" alt="">
-                            <div
-                                    class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                <div class="mb-2">
-                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                                       href="">Business</a>
-                                    <a class="text-body" href=""><small>Jan 01, 2045</small></a>
-                                </div>
-                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum
-                                    dolor sit amet elit...</a>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                            <img class="img-fluid" src="../Images/news-110x110-4.jpg" alt="">
-                            <div
-                                    class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                <div class="mb-2">
-                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                                       href="">Business</a>
-                                    <a class="text-body" href=""><small>Jan 01, 2045</small></a>
-                                </div>
-                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum
-                                    dolor sit amet elit...</a>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                            <img class="img-fluid" src="../Images/news-110x110-5.jpg" alt="">
-                            <div
-                                    class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                <div class="mb-2">
-                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                                       href="">Business</a>
-                                    <a class="text-body" href=""><small>Jan 01, 2045</small></a>
-                                </div>
-                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum
-                                    dolor sit amet elit...</a>
-                            </div>
-                        </div>
+                        <% } %>
                     </div>
                 </div>
                 <%--                Categories Start--%>
@@ -166,16 +123,11 @@
                     </div>
                     <div class="bg-white border border-top-0 p-3">
                         <div class="d-flex flex-wrap m-n1">
-                            <a href="" class="btn btn-sm btn-outline-secondary m-1">Politics</a>
-                            <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
-                            <a href="" class="btn btn-sm btn-outline-secondary m-1">Corporate</a>
-                            <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
-                            <a href="" class="btn btn-sm btn-outline-secondary m-1">Health</a>
-                            <a href="" class="btn btn-sm btn-outline-secondary m-1">Education</a>
-                            <a href="" class="btn btn-sm btn-outline-secondary m-1">Science</a>
-                            <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
-                            <a href="" class="btn btn-sm btn-outline-secondary m-1">Foods</a>
-                            <a href="" class="btn btn-sm btn-outline-secondary m-1">Travel</a>
+                            <%
+                                for (Category category : listCategories) { %>
+                            <a href="<%=request.getContextPath()%>/homepage?category_id=<%=category.getId()%>" class="btn btn-sm btn-outline-secondary m-1"><%=category.getName()%></a>
+                            <% } %>
+                            <a href="<%=request.getContextPath()%>/homepage" class="btn btn-sm btn-outline-secondary m-1">All</a>
                         </div>
                     </div>
                 </div>

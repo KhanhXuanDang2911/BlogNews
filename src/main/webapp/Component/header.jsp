@@ -18,10 +18,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="../Css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/Css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,9 +37,9 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
             <div class="navbar-nav mr-auto py-0">
-                <a href="../Home" class="nav-item nav-link active">Home - News</a>
-                <a href="../NewsDetail" class="nav-item nav-link">News Detail</a>
-                <a href="../LoginSignUp" class="nav-item nav-link">Login - Sign Up</a>
+                <a href="<%=request.getContextPath()%>/homepage" class="nav-item nav-link active">Home - News</a>
+                <a href="<%=request.getContextPath()%>/NewsDetail" class="nav-item nav-link">News Detail</a>
+                <a href="<%=request.getContextPath()%>/LoginSignUp" class="nav-item nav-link">Login - Sign Up</a>
             </div>
             <div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
                 <input type="text" class="form-control border-0" placeholder="Keyword">
