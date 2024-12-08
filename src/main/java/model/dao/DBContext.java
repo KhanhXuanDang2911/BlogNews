@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DBContext {
     protected Connection connection;
     public DBContext(){
-        final String URL = "jdbc:mysql://localhost:3306/news";
+        final String URL = "jdbc:mysql://localhost:3306/blognews";
         final String USERNAME = "root";
         final String PASSWORD = "123456";
         try{

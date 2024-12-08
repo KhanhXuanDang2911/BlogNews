@@ -11,7 +11,7 @@ import model.bo.UserBO;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/users/search")
+@WebServlet("/SearchUser")
 public class SearchUser extends HttpServlet {
     private UserBO userBO = new UserBO();
 

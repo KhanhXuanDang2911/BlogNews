@@ -8,10 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.bean.User;
 import model.bo.AuthenBO;
+import util.MD5;
 
 import java.io.IOException;
 
-@WebServlet("/login")
+@WebServlet("/Login")
 public class Login extends HttpServlet {
     AuthenBO authenBO = new AuthenBO();
 
@@ -24,14 +25,14 @@ public class Login extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        User user = authenBO.isValid(username, password);
+        User user = authenBO.isValid(username, MD5.getMD5(password));
 
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("/homepage");
         } else {
-            response.sendRedirect("LoginSignUp/index.jsp");
+            response.sendRedirect("/Login");
         }
     }
 }

@@ -11,7 +11,7 @@ import model.bo.UserBO;
 
 import java.io.IOException;
 
-@WebServlet("users/update")
+@WebServlet("/UpdateUser")
 public class UpdateUser extends HttpServlet {
     UserBO userBO = new UserBO();
 
@@ -24,7 +24,7 @@ public class UpdateUser extends HttpServlet {
             request.getRequestDispatcher("Users/Update.jsp").forward(request, response);
         }catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("/users");
+            response.sendRedirect("/SearchUser");
         }
     }
 

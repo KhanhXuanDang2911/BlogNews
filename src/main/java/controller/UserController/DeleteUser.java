@@ -9,7 +9,7 @@ import model.bo.UserBO;
 
 import java.io.IOException;
 
-@WebServlet("/users/delete")
+@WebServlet("/DeleteUser")
 public class DeleteUser extends HttpServlet {
     private UserBO userBO = new UserBO();
 
@@ -27,6 +27,6 @@ public class DeleteUser extends HttpServlet {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-        response.sendRedirect("/users");
+        response.sendRedirect("/SearchUser");
     }
 }

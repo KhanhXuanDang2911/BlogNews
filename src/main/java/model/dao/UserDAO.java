@@ -13,7 +13,7 @@ public class UserDAO extends DBContext {
     }
 
     public User getUserByUsername(String username) {
-        String sql = "SELECT * FROM users WHERE username = ?";
+        String sql = "SELECT * FROM user WHERE username = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, username);
 
@@ -36,7 +36,7 @@ public class UserDAO extends DBContext {
     }
 
     public User getUserById(long id) {
-        String sql = "SELECT * FROM users WHERE id = ?";
+        String sql = "SELECT * FROM user WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
 
@@ -59,7 +59,7 @@ public class UserDAO extends DBContext {
     }
 
     public void addUser(User user) {
-        String sql = "INSERT INTO users (username, password, name, role, is_active, avatar) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO user (username, password, name, role, is_active, avatar) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPassword());
@@ -75,7 +75,7 @@ public class UserDAO extends DBContext {
     }
 
     public void updateUser(User user) {
-        String sql = "UPDATE users SET password = ?, name = ?, role = ?, is_active = ?, avatar = ? WHERE id = ?";
+        String sql = "UPDATE user SET password = ?, name = ?, role = ?, is_active = ?, avatar = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, user.getPassword());
             stmt.setString(2, user.getName());
@@ -91,7 +91,7 @@ public class UserDAO extends DBContext {
     }
 
     public void deleteUser(long userId) {
-        String sql = "DELETE FROM users WHERE id = ?";
+        String sql = "DELETE FROM user WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, userId);
             stmt.executeUpdate();
@@ -101,7 +101,7 @@ public class UserDAO extends DBContext {
     }
 
     public List<User> searchUserByName(String name) {
-        String sql = "SELECT * FROM users WHERE name LIKE ?";
+        String sql = "SELECT * FROM user WHERE name LIKE ?";
         List<User> users = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, "%" + name + "%");

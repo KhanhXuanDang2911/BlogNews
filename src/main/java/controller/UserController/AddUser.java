@@ -11,7 +11,7 @@ import model.bo.UserBO;
 
 import java.io.IOException;
 
-@WebServlet("/users/create")
+@WebServlet("/CreateUser")
 public class AddUser extends HttpServlet {
     private UserBO userBO = new UserBO();
 
@@ -46,6 +46,6 @@ public class AddUser extends HttpServlet {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-        response.sendRedirect("/users");
+        response.sendRedirect("/SearchUser");
     }
 }
