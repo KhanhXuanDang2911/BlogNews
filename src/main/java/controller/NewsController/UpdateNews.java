@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import model.bean.Category;
 import model.bean.News;
+import model.bean.User;
 import model.bo.CategoryBO;
 import model.bo.NewsBO;
 
@@ -24,7 +25,7 @@ public class UpdateNews extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        News news = newsBO.getListNews(id, null, 0).get(0);
+        News news = newsBO.getListNews(id, null, 0, null, null).get(0);
         request.setAttribute("news", news);
         List<Category> listCategories = categoryBO.getListCategories();
         request.setAttribute("listCategories", listCategories);
@@ -36,7 +37,8 @@ public class UpdateNews extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id-news"));
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        int authorId = 1; // Hardcode author id
+        User user = (User) request.getSession().getAttribute("user");
+        Long authorId = user.getId(); // Hardcode author id
         String status = request.getParameter("status");
         int categoryId = Integer.parseInt(request.getParameter("category_id"));
         Part image =  request.getPart("image");
@@ -47,9 +49,9 @@ public class UpdateNews extends HttpServlet {
             System.out.println(fileName);
             image.write(fileName);
         } else{
-            filePath = newsBO.getListNews(id, null, 0).get(0).getImage();
+            filePath = newsBO.getListNews(id, null, 0, null, null).get(0).getImage();
         }
-        boolean check = newsBO.updateNews(new News(id, title, content, authorId, status, filePath, null, new Category(categoryId, null)));
+        boolean check = newsBO.updateNews(new News(id, title, content, new User(authorId, null), status, filePath, null, new Category(categoryId, null)));
         if (check) {
             request.setAttribute("message", "Update news successfully");
         } else {

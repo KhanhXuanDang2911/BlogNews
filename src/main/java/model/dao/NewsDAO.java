@@ -1,6 +1,7 @@
 package model.dao;
 import model.bean.Category;
 import model.bean.News;
+import model.bean.User;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -15,11 +16,13 @@ public class NewsDAO extends DBContext {
 
     //    id, title, content, author_id, status, image, published_at
 
-    public List<News> getListNews(int id, String keyword, int idCategory){
+    public List<News> getListNews(int id, String keyword, int idCategory, String username, String statusParam){
         List<News> listNews = new ArrayList<News>();
-        String sql = "select n.id, n.title, n.content, n.author_id, n.status, n.image, n.published_at, n.category_id, c.name\n" +
-                "from news as n join category as c \n" +
-                "on n.category_id = c.id where 1 = 1";
+        String sql = "select n.id, n.title, n.content, n.author_id, u.name as name_author, u.avatar ,n.status, n.image, n.published_at, n.category_id, c.name as name_category\n" +
+                "                from news as n join category as c\n" +
+                "                on n.category_id = c.id \n" +
+                "                join user as u on n.author_id = u.id\n" +
+                "                where 1 = 1";
         if (idCategory > 0) {
             sql += " and n.category_id = " + idCategory;
         }
@@ -29,6 +32,12 @@ public class NewsDAO extends DBContext {
             sql += " and n.title like '%" + keyword + "%'";
             sql += " and n.content like '%" + keyword + "%'";
         }
+        if (username != null && !username.isEmpty()) {
+            sql += " and u.username = '" + username + "'";
+        }
+        if (statusParam != null && !statusParam.isEmpty()) {
+            sql += " and n.status = '" + statusParam + "'";
+        }
         try{
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
@@ -36,13 +45,15 @@ public class NewsDAO extends DBContext {
                 int idNews = rs.getInt("id");
                 String title = rs.getString("title");
                 String content = rs.getString("content");
-                int authorId = rs.getInt("author_id");
+                Long authorId = rs.getLong("author_id");
+                String authorName = rs.getString("name_author");
+                String authorAvatar = rs.getString("avatar");
                 String status = rs.getString("status");
                 String image = rs.getString("image");
                 Date publishedAt = rs.getDate("published_at");
                 int categoryId = rs.getInt("category_id");
-                String categoryName = rs.getString("name");
-                listNews.add(new News(idNews, title, content, authorId, status, image, new java.util.Date(publishedAt.getTime()), new Category(categoryId, categoryName)));
+                String categoryName = rs.getString("name_category");
+                listNews.add(new News(idNews, title, content, new User(authorId, authorName, authorAvatar), status, image, new java.util.Date(publishedAt.getTime()), new Category(categoryId, categoryName)));
             }
             return listNews;
         }catch (Exception e){
@@ -57,7 +68,7 @@ public class NewsDAO extends DBContext {
             java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, news.getTitle());
             preparedStatement.setString(2, news.getContent());
-            preparedStatement.setInt(3, news.getAuthorId());
+            preparedStatement.setLong(3, news.getAuthor().getId());
             preparedStatement.setString(4, news.getStatus());
             preparedStatement.setString(5, news.getImage());
             preparedStatement.setDate(6, new Date(news.getPublishedAt().getTime()));
@@ -75,7 +86,7 @@ public class NewsDAO extends DBContext {
             java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, news.getTitle());
             preparedStatement.setString(2, news.getContent());
-            preparedStatement.setInt(3, news.getAuthorId());
+            preparedStatement.setLong(3, news.getAuthor().getId());
             preparedStatement.setString(4, news.getStatus());
             preparedStatement.setString(5, news.getImage());
             preparedStatement.setInt(6, news.getCategory().getId());

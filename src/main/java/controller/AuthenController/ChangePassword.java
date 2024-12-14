@@ -16,6 +16,11 @@ public class ChangePassword extends HttpServlet {
     private AuthenBO authenBO = new AuthenBO();
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/Profile/ChangePassword.jsp").forward(request, response);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String currentPassword = request.getParameter("currentPassword");
@@ -25,14 +30,14 @@ public class ChangePassword extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         if (user == null) {
-            response.sendRedirect("/Login");
+            response.sendRedirect(request.getContextPath() + "/Login");
         }
         else{
             if (authenBO.changePassword(currentPassword, newPassword, user)){
-                response.sendRedirect("/Profile/ChangePassword.jsp?success=true");
+                response.sendRedirect(request.getContextPath() + "/Profile/ChangePassword.jsp?success=true");
             }
             else {
-                response.sendRedirect("/Profile/ChangePassword.jsp?success=false");
+                response.sendRedirect(request.getContextPath() + "/Profile/ChangePassword.jsp?success=false");
             }
         }
     }

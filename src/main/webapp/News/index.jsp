@@ -41,13 +41,13 @@
                     List<News> listNews = (List<News>) request.getAttribute("listNews");
                     if (listNews != null && !listNews.isEmpty()) {
                         for (News news : listNews) {
-                            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                             String formattedDate = formatter.format(news.getPublishedAt());
                 %>
                 <tr>
                     <td><%=news.getId()%></td>
                     <td><%=news.getTitle()%></td>
-                    <td><%=news.getAuthorId()%></td>
+                    <td><%=news.getAuthor().getName()%></td>
                     <td><%=news.getStatus()%></td>
                     <td><%=formattedDate%></td>
                     <td><%=news.getCategory().getName()%></td>

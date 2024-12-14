@@ -19,7 +19,7 @@ public class Register extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("LoginSignUp/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/LoginSignUp/index.jsp").forward(request, response);
     }
 
     @Override
@@ -38,10 +38,10 @@ public class Register extends HttpServlet {
         try {
             boolean isSuccess = userBO.addUser(user);
             if (isSuccess) {
-                response.sendRedirect("/Login");
+                response.sendRedirect(request.getContextPath() + "/Login?message=Register successfully");
             }
             else {
-                response.sendRedirect("/Register");
+                response.sendRedirect(request.getContextPath() + "/Register?message=Register failed");
             }
         } catch (Exception e){
             e.printStackTrace();

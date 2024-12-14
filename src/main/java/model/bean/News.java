@@ -7,17 +7,17 @@ public class News {
     private int id;
     private String title;
     private String content;
-    private int authorId;
+    private User author;
     private String status;
     private String image;
     private Date publishedAt;
     Category category;
 
-    public News(int id, String title, String content, int authorId, String status, String image, Date publishedAt, Category category) {
+    public News(int id, String title, String content, User author, String status, String image, Date publishedAt, Category category) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.authorId = authorId;
+        this.author = author;
         this.status = status;
         this.image = image;
         this.publishedAt = publishedAt;
@@ -48,12 +48,12 @@ public class News {
         this.content = content;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     public String getStatus() {

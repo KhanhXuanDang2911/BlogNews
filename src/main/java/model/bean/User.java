@@ -27,6 +27,16 @@ public class User {
         this.avatar = avatar;
     }
 
+    public User(Long id, String name){
+        this.id = id;
+        this.name = name;
+    }
+    public User(Long id, String name, String avatar){
+        this.id = id;
+        this.name = name;
+        this.avatar = avatar;
+    }
+
     public Long getId() {
         return id;
     }

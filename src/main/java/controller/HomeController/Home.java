@@ -24,9 +24,9 @@ public class Home extends HttpServlet {
         if (category_draft != null) {
             category_id = Integer.parseInt(category_draft);
         }
-        List<News> listNews = newsBO.getListNews(0, null, category_id);
+        List<News> listNews = newsBO.getListNews(0, null, category_id, null, "ACCEPT");
         System.out.println(listNews.size());
-        List<News> featuredNews = newsBO.getListNews(0, null, 0);
+        List<News> featuredNews = newsBO.getListNews(0, null, 0, null, "ACCEPT");
         System.out.println(featuredNews.size());
         List<Category> listCategories = categoryBO.getListCategories();
         request.setAttribute("listNews", listNews);

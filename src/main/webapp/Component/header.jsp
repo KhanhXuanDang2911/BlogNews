@@ -1,4 +1,4 @@
-
+<%@ page import="model.bean.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,9 +37,9 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
             <div class="navbar-nav mr-auto py-0">
-                <a href="<%=request.getContextPath()%>/homepage" class="nav-item nav-link active">Home - News</a>
+                <a href="<%=request.getContextPath()%>/homepage" class="nav-item nav-link active">Home</a>
                 <a href="<%=request.getContextPath()%>/NewsDetail" class="nav-item nav-link">News Detail</a>
-                <a href="<%=request.getContextPath()%>/LoginSignUp" class="nav-item nav-link">Login - Sign Up</a>
+                <a href="<%=request.getContextPath()%>/homepage" class="nav-item nav-link">Contact</a>
             </div>
             <div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
                 <input type="text" class="form-control border-0" placeholder="Keyword">
@@ -48,6 +48,21 @@
                             class="fa fa-search"></i></button>
                 </div>
             </div>
+            <% if (session.getAttribute("user") == null) { %>
+            <a href="<%=request.getContextPath()%>/LoginSignUp" class="nav-item nav-link">LOGIN</a>
+            <% } else {
+                User user = (User)session.getAttribute("user");
+            %>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" style="margin-left: 18px; margin-right: 30px; outline: none"><img src="<%=request.getContextPath()%>/<%=user.getAvatar()%>" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover" alt="avatar"></a>
+                <div class="dropdown-menu rounded-0 m-0">
+                    <a href="<%=request.getContextPath()%>/UpdateProfile" class="dropdown-item">PROFILE</a>
+                    <a href="<%=request.getContextPath()%>/Logout" class="dropdown-item">LOG OUT</a>
+                    <a href="<%=request.getContextPath()%>/homepage" class="dropdown-item">ADMIN PAGE</a>
+                </div>
+                <% } %>
+            </div>
+
         </div>
     </nav>
 </div>

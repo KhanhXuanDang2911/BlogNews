@@ -1,3 +1,4 @@
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -85,26 +86,26 @@
 <div class="container-xl px-4 mt-4">
     <!-- Account page navigation-->
     <nav class="nav nav-borders">
-        <a class="nav-link ms-0 active" href="index.jsp">Profile</a>
-        <a class="nav-link" href="NewsHistory.jsp">News History</a>
-        <a class="nav-link" href="ChangePassword.jsp">Change password</a>
-        <a class="nav-link" href="CreateNews.jsp">Create news</a>
-
+        <a class="nav-link ms-0 active" href="<%=request.getContextPath()%>/UpdateProfile">Profile</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/NewsHistory">News History</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/ChangePassword">Change password</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/homepage">Back to home</a>
     </nav>
     <hr class="mt-0 mb-4">
     <div class="row">
         <div class="col-xl-4">
             <!-- Profile picture card-->
-            <form class="card mb-4 mb-xl-0">
+            <form class="card mb-4 mb-xl-0" action="<%=request.getContextPath()%>/UpdateAvatar" enctype="multipart/form-data" method="post">
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
                     <!-- Profile picture image-->
                     <img class="img-account-profile rounded-circle mb-2"
-                         src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                         src="<%=request.getContextPath()%>/${sessionScope.user.avatar}" alt="avatar">
+                    <input type="file" class="form-control" name="avatar" id="inputAvatar">
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button-->
-                    <input class="btn btn-primary" type="submit" value="Update Image">
+                    <input class="btn btn-primary" type="submit" value="Update Avatar">
                 </div>
             </form>
         </div>
@@ -118,20 +119,20 @@
                             <!-- Form Group (first name)-->
                             <div class="col-md-12">
                                 <label class="small mb-1" for="inputFirstName">Full name</label>
-                                <input class="form-control" name="name" type="text" id="inputFirstName">
+                                <input class="form-control" name="name" type="text" id="inputFirstName" value="${sessionScope.user.name}">
                             </div>
                         </div>
                         <!-- Form Group (email address)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input class="form-control" id="inputEmailAddress" type="email" name="email">
+                            <input class="form-control" id="inputEmailAddress" type="email" name="email" value="${sessionScope.user.email}">
                         </div>
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (phone number)-->
                             <div class="col-md-12">
                                 <label class="small mb-1" for="inputPhone">Phone number</label>
-                                <input class="form-control" id="inputPhone" type="tel" name="phone">
+                                <input class="form-control" id="inputPhone" type="tel" name="phone" value="${sessionScope.user.phone}">
                             </div>
                         </div>
                         <!-- Save changes button-->
@@ -145,8 +146,21 @@
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
-
 </script>
+<script>
+    function showMessage(message) {
+        alert(message);
+    }
+</script>
+<%
+    String message = (String) request.getAttribute("message");
+    if (message != null) { %>
+<script>
+    window.onload = function(){
+        showMessage("<%=message%>");
+    };
+</script>
+<% } %>
 </body>
 
 </html>

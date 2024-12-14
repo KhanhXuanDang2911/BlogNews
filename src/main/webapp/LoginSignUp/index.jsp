@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Sign Up</title>
-    <link rel="stylesheet" href="../Css/LoginSignUp.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/Css/LoginSignUp.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+    <script>
+        function showMessage(message) {
+            alert(message);
+        }
+    </script>
 </head>
 
 <body>
@@ -59,7 +63,17 @@
     </div>
 </div>
 
-<script src="../JavaScript/LoginSignUp.js"></script>
+<script src="<%=request.getContextPath()%>/JavaScript/LoginSignUp.js"></script>
+
+<%
+    String message = request.getParameter("message");
+    if (message != null) { %>
+<script>
+    window.onload = function(){
+        showMessage("<%=message%>");
+    };
+</script>
+<% } %>
 </body>
 
 </html>

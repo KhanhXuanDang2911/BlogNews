@@ -16,7 +16,7 @@ public class ListNews extends HttpServlet {
     private NewsBO newsBO = new NewsBO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<News> listNews = newsBO.getListNews(0, null, 0);
+        List<News> listNews = newsBO.getListNews(0, null, 0, null, null);
         request.setAttribute("listNews", listNews);
         request.getRequestDispatcher("/News/index.jsp").forward(request, response);
     }

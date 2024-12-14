@@ -18,7 +18,7 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("LoginSignUp/index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/LoginSignUp/index.jsp").forward(req, resp);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,9 +30,9 @@ public class Login extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            response.sendRedirect("/homepage");
+            response.sendRedirect(request.getContextPath() + "/homepage");
         } else {
-            response.sendRedirect("/Login");
+            response.sendRedirect(request.getContextPath() + "/Login?message=Invalid username or password");
         }
     }
 }

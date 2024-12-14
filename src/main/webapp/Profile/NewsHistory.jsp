@@ -1,183 +1,182 @@
+<%@ page import="model.bean.News" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>bs5 profile billing page - Bootdey.com</title>
+    <title>News History Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-        body {
-            margin-top: 20px;
-            background-color: #f2f6fc;
-            color: #69707a;
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+          integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+    <style>
+        .table th,
+        .table td {
+            white-space: nowrap; /* Tránh xuống dòng không cần thiết */
+            overflow: hidden; /* Ẩn phần nội dung thừa */
+            text-overflow: ellipsis; /* Hiển thị dấu ... */
+            font-size: 14px;
         }
 
-        .img-account-profile {
-            height: 10rem;
+        .table th:nth-child(2),
+        .table td:nth-child(2) {
+            max-width: 150px; /* Tăng độ rộng cho cột Title */
         }
 
-        .rounded-circle {
-            border-radius: 50% !important;
+        .table th:nth-child(7),
+        .table td:nth-child(7) {
+            max-width: 170px; /* Độ rộng vừa phải cho cột Action */
+        }
+        .table th:nth-child(5),
+        .table td:nth-child(5) {
+            max-width: 70px; /* Độ rộng vừa phải cho cột Action */
         }
 
-        .card {
-            box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+        .action-btn {
+            margin-right: 4px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
         }
 
-        .card .card-header {
-            font-weight: 500;
+        .action-btn i {
+            margin-right: 4px;
         }
 
-        .card-header:first-child {
-            border-radius: 0.35rem 0.35rem 0 0;
+        .btn-add {
+            background-color: #198754;
+            border-color: #198754;
         }
 
-        .card-header {
-            padding: 1rem 1.35rem;
-            margin-bottom: 0;
-            background-color: rgba(33, 40, 50, 0.03);
-            border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+        .btn-add:hover {
+            background-color: #157347;
+            border-color: #146c43;
         }
 
-        .form-control,
-        .dataTable-input {
-            display: block;
-            width: 100%;
-            padding: 0.875rem 1.125rem;
-            font-size: 0.875rem;
-            font-weight: 400;
-            line-height: 1;
-            color: #69707a;
-            background-color: #fff;
-            background-clip: padding-box;
-            border: 1px solid #c5ccd6;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            border-radius: 0.35rem;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        .btn-update {
+            background-color: #fd7e14;
+            border-color: #fd7e14;
         }
 
-        .nav-borders .nav-link.active {
-            color: #0061f2;
-            border-bottom-color: #0061f2;
+        .btn-update:hover {
+            background-color: #dc6a0a;
+            border-color: #cc5805;
         }
 
-        .nav-borders .nav-link {
-            color: #69707a;
-            border-bottom-width: 0.125rem;
-            border-bottom-style: solid;
-            border-bottom-color: transparent;
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-            padding-left: 0;
-            padding-right: 0;
-            margin-left: 1rem;
-            margin-right: 1rem;
+        .btn-view {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
         }
 
-        .fa-2x {
-            font-size: 2em;
+        .btn-view:hover {
+            background-color: #0a58ca;
+            border-color: #09429b;
         }
 
-        .table-billing-history th,
-        .table-billing-history td {
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            padding-left: 1.375rem;
-            padding-right: 1.375rem;
+        .btn-delete {
+            background-color: #dc3545;
+            border-color: #dc3545;
         }
 
-        .table> :not(caption)>*>*,
-        .dataTable-table> :not(caption)>*>* {
-            padding: 0.75rem 0.75rem;
-            background-color: var(--bs-table-bg);
-            border-bottom-width: 1px;
-            box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
-        }
-
-        .border-start-primary {
-            border-left-color: #0061f2 !important;
-        }
-
-        .border-start-secondary {
-            border-left-color: #6900c7 !important;
-        }
-
-        .border-start-success {
-            border-left-color: #00ac69 !important;
-        }
-
-        .border-start-lg {
-            border-left-width: 0.25rem !important;
-        }
-
-        .h-100 {
-            height: 100% !important;
+        .btn-delete:hover {
+            background-color: #bb2d3b;
+            border-color: #b02a37;
         }
     </style>
+
 </head>
 
 <body>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
-      integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
-
 <div class="container-xl px-4 mt-4">
-    <!-- Account page navigation-->
     <nav class="nav nav-borders">
-        <a class="nav-link ms-0" href="index.jsp">Profile</a>
-        <a class="nav-link active" href="NewsHistory.jsp">News History</a>
-        <a class="nav-link" href="ChangePassword.jsp">Change password</a>
-        <a class="nav-link" href="CreateNews.jsp">Create news</a>
+        <a class="nav-link ms-0 active" href="<%=request.getContextPath()%>/UpdateProfile">Profile</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/NewsHistory">News History</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/ChangePassword">Change password</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/homepage">Back to home</a>
     </nav>
     <hr class="mt-0 mb-4">
-    <!-- news history card-->
+
+    <%
+        List<News> listNews = (List<News>) request.getAttribute("listNews");
+    %>
+    <!-- News history card -->
     <div class="card mb-4">
-        <div class="card-header">News History</div>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <span>News History</span>
+            <a href="<%=request.getContextPath()%>//CreateNewsForUser" class="action-btn btn-add"><i class="fas fa-plus"></i>Create news</a>
+        </div>
         <div class="card-body p-0">
-            <!-- news history table-->
+            <!-- News history table -->
             <div class="table-responsive table-billing-history">
                 <table class="table mb-0">
                     <thead>
                     <tr>
                         <th class="border-gray-200" scope="col">ID</th>
-                        <th class="border-gray-200" scope="col">Date</th>
                         <th class="border-gray-200" scope="col">Title</th>
+                        <th class="border-gray-200" scope="col">Author</th>
                         <th class="border-gray-200" scope="col">Status</th>
+                        <th class="border-gray-200" scope="col">Published at</th>
+                        <th class="border-gray-200" scope="col">Category</th>
+                        <th class="border-gray-200" scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <% for (News news : listNews) {
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                        String formattedDate = formatter.format(news.getPublishedAt());%>
                     <tr>
-                        <td>#39201</td>
-                        <td>06/15/2021</td>
-                        <td>Title 1</td>
+                        <td><%=news.getId()%></td>
+                        <td><%=news.getTitle()%></td>
+                        <td><%=news.getAuthor().getName()%></td>
+                        <% if (news.getStatus().equals("PENDING")){%>
                         <td><span class="badge bg-light text-dark">Pending</span></td>
+                        <% } %>
+                        <% if (news.getStatus().equals("ACCEPT")) {%>
+                        <td><span class="badge bg-success text-dark">ACCEPT</span></td>
+                        <% } %>
+                        <% if (news.getStatus().equals("REJECTED")) {%>
+                        <td><span class="badge bg-danger text-dark">REJECTED</span></td>
+                        <% } %>
+                        <td><%=formattedDate%></td>
+                        <td><%=news.getCategory().getName()%></td>
+                        <td>
+                            <a href="<%=request.getContextPath()%>/UpdateNewsForUser?id=<%=news.getId()%>" class="action-btn btn-update"><i class="fas fa-edit"></i>Update</a>
+                            <a href="<%=request.getContextPath()%>/NewsDetail?id_news=<%=news.getId()%>" class="action-btn btn-view"><i class="fas fa-eye"></i>View</a>
+                            <a href="<%=request.getContextPath()%>/DeleteNews?id=<%=news.getId()%>" class="action-btn btn-delete"><i class="fas fa-trash"></i>Delete</a>
+                        </td>
                     </tr>
-                    <tr>
-                        <td>#38594</td>
-                        <td>05/15/2021</td>
-                        <td>Title 2</td>
-                        <td><span class="badge bg-success">Success</span></td>
-                    </tr>
-                    <tr>
-                        <td>#38223</td>
-                        <td>04/15/2021</td>
-                        <td>Title 3</td>
-                        <td><span class="badge bg-success">Success</span></td>
-                    </tr>
+                    <% } %>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function showMessage(message) {
+        alert(message);
+    }
+</script>
+<%
+    String message = (String) request.getAttribute("message");
+    if (message != null) { %>
+<script>
+    window.onload = function(){
+        showMessage("<%=message%>");
+    };
+</script>
+<% } %>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript">
-
-</script>
 </body>
 
 </html>

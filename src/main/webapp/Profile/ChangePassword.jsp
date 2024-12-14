@@ -91,10 +91,10 @@
 <div class="container-xl px-4 mt-4">
     <!-- Account page navigation-->
     <nav class="nav nav-borders">
-        <a class="nav-link ms-0" href="index.jsp">Profile</a>
-        <a class="nav-link" href="NewsHistory.jsp">News History</a>
-        <a class="nav-link active" href="ChangePassword.jsp">Change password</a>
-        <a class="nav-link" href="CreateNews.jsp">Create news</a>
+        <a class="nav-link ms-0 active" href="<%=request.getContextPath()%>/UpdateProfile">Profile</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/NewsHistory">News History</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/ChangePassword">Change password</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/homepage">Back to home</a>
     </nav>
     <hr class="mt-0 mb-4">
     <div class="row">

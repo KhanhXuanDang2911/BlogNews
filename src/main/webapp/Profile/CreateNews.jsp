@@ -1,4 +1,5 @@
-
+<%@ page import="model.bean.Category" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,31 +93,49 @@
 <div class="container-xl px-4 mt-4">
     <!-- Account page navigation-->
     <nav class="nav nav-borders">
-        <a class="nav-link ms-0" href="index.jsp">Profile</a>
-        <a class="nav-link" href="NewsHistory.jsp">News History</a>
-        <a class="nav-link" href="ChangePassword.jsp">Change password</a>
-        <a class="nav-link active" href="CreateNews.jsp">Create news</a>
+        <a class="nav-link ms-0 active" href="<%=request.getContextPath()%>/UpdateProfile">Profile</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/NewsHistory">News History</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/ChangePassword">Change password</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/homepage">Back to home</a>
+
     </nav>
     <hr class="mt-0 mb-4">
     <div class="row">
         <div class="col-lg-12">
             <!-- Create news card-->
+            <%
+                List<Category> listCategories = (List<Category>) request.getAttribute("listCategories");
+                System.out.println(listCategories);
+            %>
             <div class="card mb-4">
                 <div class="card-header">Create News</div>
                 <div class="card-body">
-                    <form>
+                    <form action="<%=request.getContextPath()%>/CreateNewsForUser" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label class="small mb-1" for="titleNews">Title</label>
-                            <input class="form-control" id="titleNews" name="titleNews" type="text"
+                            <input class="form-control" id="titleNews" name="title" type="text"
                                    placeholder="Enter title news">
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="contentNews">Content</label>
-                            <textarea class="form-control" id="contentNews" name="contentNews" rows="20"></textarea>
+                            <textarea class="form-control" id="contentNews" name="content" rows="20"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category">Image</label>
+                            <select name="category_id" id="category" required class ="form-control">
+                                <%
+                                    for (int i = 0; i < listCategories.size(); i++) {
+                                        if(i == 0) { %>
+                                <option value="<%=listCategories.get(i).getId()%>" selected><%=listCategories.get(i).getName()%></option>
+                                <% } else { %>
+                                <option value="<%=listCategories.get(i).getId()%>"><%=listCategories.get(i).getName()%></option>
+
+                                <% } }%>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="imageNews">Image</label>
-                            <input class="form-control" id="imageNews" name="imageNews" type="file"
+                            <input class="form-control" id="imageNews" name="image" type="file"
                                    placeholder="Choose file">
                         </div>
                         <button class="btn btn-primary" type="submit">Save</button>
@@ -132,7 +151,7 @@
 </script>
 <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace('contentNews');
+    CKEDITOR.replace('content');
 </script>
 </body>
 

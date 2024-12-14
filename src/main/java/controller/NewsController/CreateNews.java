@@ -3,12 +3,10 @@ package controller.NewsController;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
+import jakarta.servlet.http.*;
 import model.bean.Category;
 import model.bean.News;
+import model.bean.User;
 import model.bo.CategoryBO;
 import model.bo.NewsBO;
 
@@ -31,7 +29,8 @@ public class CreateNews extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        int authorId = 1; // Hardcode author id
+        User user = (User) request.getSession().getAttribute("user");
+        Long authorId = user.getId(); // Hardcode author id
         String status = "ACCEPT"; // // Hardcode status
         int categoryId = Integer.parseInt(request.getParameter("category_id"));
         Part image =  request.getPart("image");
@@ -39,7 +38,7 @@ public class CreateNews extends HttpServlet {
         String fileName = request.getServletContext().getRealPath(filePath);
         System.out.println(fileName);
         image.write(fileName);
-        boolean check = newsBO.addNews(new News(0, title, content, authorId, status, filePath, null, new Category(categoryId, null)));
+        boolean check = newsBO.addNews(new News(0, title, content, new User(authorId, null), status, filePath, null, new Category(categoryId, null)));
         if (check) {
             request.setAttribute("message", "Add news successfully");
         } else {
