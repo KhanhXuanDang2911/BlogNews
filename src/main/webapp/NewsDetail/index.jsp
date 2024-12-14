@@ -76,7 +76,7 @@
                                 </h6>
                                 <p><%=comment.getContent()%></p>
                                 <!-- Buttons for Edit and Delete -->
-                                <% if (userSession != null && userSession.getId() == comment.getAuthor().getId()) {%>
+                                <% if ((userSession != null && userSession.getId() == comment.getAuthor().getId()) || userSession.getRole().name().equalsIgnoreCase("ADMIN")) {%>
                                 <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editCommentModal-<%=comment.getId()%>">
                                     <i class="fas fa-edit"></i> Edit
                                 </button>
