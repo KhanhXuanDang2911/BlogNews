@@ -26,6 +26,12 @@ public class UserBO {
     }
 
     public boolean updateProfile(User user) {
+        if("".equals(user.getPhone())){
+            user.setPhone(null);
+        }
+        if("".equals(user.getEmail())){
+            user.setEmail(null);
+        }
         User existingUser = findUserById(user.getId());
         if (existingUser == null) {
             return false;
