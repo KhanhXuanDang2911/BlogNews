@@ -33,7 +33,7 @@ public class NewsDetail extends HttpServlet {
 
         if (user == null) {
             if (!news.getStatus().equals("ACCEPT")){ // filter -> not found
-                response.sendRedirect(request.getContextPath() + "/homepage");
+                response.sendRedirect(request.getContextPath() + "/ERROR404/index.jsp");
                 return;
             }
         }
@@ -41,7 +41,7 @@ public class NewsDetail extends HttpServlet {
             // do nothing;
         }
         else if (user.getRole().name().equalsIgnoreCase("USER") && !news.getStatus().equals("ACCEPT")) {
-            response.sendRedirect(request.getContextPath() + "/homepage"); // filter -> not found
+            response.sendRedirect(request.getContextPath() + "/ERROR404/index.jsp"); // filter -> not found
             return;
         }
         List<Comment> listComments = commentBO.getCommentByIdNews(id_news);

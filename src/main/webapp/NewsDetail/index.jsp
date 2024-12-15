@@ -30,7 +30,9 @@
                             <a class="text-body" href=""><%=formattedDate%></a>
                         </div>
                         <h1 class="mb-3 text-secondary text-uppercase font-weight-bold"><%=news.getTitle()%></h1>
-                        <%=news.getContent()%>
+                        <div>
+                            <%=news.getContent()%>
+                        </div>
 
                     </div>
                     <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
@@ -56,7 +58,6 @@
                         return confirmed; // Trả về true nếu người dùng nhấn "OK", form sẽ tiếp tục submit
                     }
                 </script>
-
                 <div class="mb-3">
                     <div class="section-title mb-0">
                         <h4 class="m-0 text-uppercase font-weight-bold"><%= listComments != null ? listComments.size() : 0 %> Comments</h4>
@@ -108,7 +109,7 @@
                                             <input type="hidden" name="id_news" value="<%=news.getId()%>">
                                             <div class="form-group">
                                                 <label for="edit-comment-content">Content</label>
-                                                <textarea id="edit-comment-content" name="content" rows="4" class="form-control"><%=comment.getContent()%></textarea>
+                                                <textarea id="edit-comment-content" name="content" rows="4" class="form-control" required><%=comment.getContent()%></textarea>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -139,7 +140,7 @@
                             <input type="hidden" name="id-news" readonly value="<%=news.getId()%>">
                             <div class="form-group">
                                 <label for="message">Message *</label>
-                                <textarea id="message" name="content" cols="30" rows="5" class="form-control"></textarea>
+                                <textarea id="message" name="content" cols="30" rows="5" class="form-control" required></textarea>
                             </div>
                             <div class="form-group mb-0">
                                 <input type="submit" value="Leave a comment"

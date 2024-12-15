@@ -30,8 +30,8 @@ public class CreateNews extends HttpServlet {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         User user = (User) request.getSession().getAttribute("user");
-        Long authorId = user.getId(); // Hardcode author id
-        String status = "ACCEPT"; // // Hardcode status
+        Long authorId = user.getId();
+        String status = "ACCEPT";
         int categoryId = Integer.parseInt(request.getParameter("category_id"));
         Part image =  request.getPart("image");
         String filePath = "/Images/" + System.currentTimeMillis() + "_" + image.getSubmittedFileName();
