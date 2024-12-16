@@ -47,6 +47,7 @@
         <url-pattern>/UpdateAvatar</url-pattern>
         <url-pattern>/UpdateProfile</url-pattern>
         <url-pattern>/UpdateUser</url-pattern>
+        <url-pattern>/ContentOfComment</url-pattern>
     </filter-mapping>
 
     <filter-mapping>

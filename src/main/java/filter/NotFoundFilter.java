@@ -38,7 +38,8 @@ public class NotFoundFilter implements Filter {
             "/ListUser",
             "/UpdateAvatar",
             "/UpdateProfile",
-            "/UpdateUser"
+            "/UpdateUser",
+            "/ContentOfComment"
     );
 
     @Override

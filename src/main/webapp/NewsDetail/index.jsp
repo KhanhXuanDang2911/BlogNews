@@ -10,9 +10,9 @@
 %>
 <style>
     .avatar_cmt {
-            width: 45px;
-            aspect-ratio: 1 / 1;
-            border-radius: 50%;
+        width: 45px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
     }
 </style>
 <div class="container-fluid" style="margin-top: 70px">
@@ -21,9 +21,9 @@
             <div class="col-lg-8">
                 <%
                     List<Comment> listComments = (List<Comment>)request.getAttribute("listComments");
-                     News news = (News) request.getAttribute("news");
-                     List<News> listNews = (List<News>) request.getAttribute("listNews");
-                     List<Category> listCategories = (List<Category>) request.getAttribute("listCategories");
+                    News news = (News) request.getAttribute("news");
+                    List<News> listNews = (List<News>) request.getAttribute("listNews");
+                    List<Category> listCategories = (List<Category>) request.getAttribute("listCategories");
                 %>
                 <!-- News Detail Start -->
                 <div class="position-relative mb-3">
@@ -141,7 +141,7 @@
                         %>
                         <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
                             <img class="img-fluid" src="<%=request.getContextPath()%><%=item.getImage()%>" alt="#"
-                                style="width: 100px; height:100%; object-fit: cover"
+                                 style="width: 100px; height:100%; object-fit: cover"
                             >
                             <div
                                     class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
@@ -212,6 +212,7 @@
 </div>
 
 <script>
+    var path = "<%=request.getContextPath()%>";
     var userData = {
         avatarPath: "<%= request.getContextPath() + userSS.getAvatar() %>",
         userName: "<%= userSS.getName() %>"
@@ -227,7 +228,7 @@
             created_at: new Date().toLocaleDateString()
         };
 
-        fetch("/AddComment", {
+        fetch(path + "/AddComment", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -252,7 +253,7 @@
 
 
     function deleteCmt(commentId) {
-        fetch(`/DeleteComment?id=`+commentId, {
+        fetch(path + `/DeleteComment?id=`+commentId, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -275,7 +276,7 @@
 
     function loadFormUpdate(commentId) {
         // Make a fetch request to the server to get the comment details
-        fetch(`/ContentOfComment?id=` + commentId, {
+        fetch(path + `/ContentOfComment?id=` + commentId, {
             method: "GET",
         })
             .then(response => response.json())  // Assuming the server returns JSON with comment data
@@ -293,7 +294,7 @@
 
                         // Handle form submission logic here (e.g., send updated data to the server)
                         const updatedContent = document.getElementById('edit-comment-content').value;
-                        fetch(`/UpdateComment`, {
+                        fetch(path +`/UpdateComment`, {
                             method: "POST",
                             headers: {
                                 'Content-Type': 'application/json',
