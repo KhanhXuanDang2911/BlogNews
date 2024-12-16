@@ -177,7 +177,16 @@
                                        href=""><%=item.getCategory().getName()%></a>
                                     <a class="text-body" href=""><small><%=formattedDate1%></small></a>
                                 </div>
-                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="<%=request.getContextPath()%>/NewsDetail?id_news=<%=item.getId()%>"><%=item.getTitle()%></a>
+                                <div style="
+                                     display: -webkit-box;
+                                    -webkit-box-orient: vertical;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    -webkit-line-clamp: 3;
+                                    line-clamp: 3;
+                                    max-width: 400px; /* Đặt chiều rộng cho thẻ cha */">
+                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="<%=request.getContextPath()%>/NewsDetail?id_news=<%=item.getId()%>"><%=item.getTitle()%></a>
+                                </div>
                             </div>
                         </div>
                         <% } %>
