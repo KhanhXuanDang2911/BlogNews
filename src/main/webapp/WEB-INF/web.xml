@@ -3,4 +3,62 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>filter.LoginFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>filter.AdminFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>NotFoundFilter</filter-name>
+        <filter-class>filter.NotFoundFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>NotFoundFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/Admin</url-pattern>
+        <url-pattern>/ChangePassword</url-pattern>
+        <url-pattern>/Logout</url-pattern>
+        <url-pattern>/CreateCategory</url-pattern>
+        <url-pattern>/DeleteCategory</url-pattern>
+        <url-pattern>/ListCategories</url-pattern>
+        <url-pattern>/UpdateCategory</url-pattern>
+        <url-pattern>/AddComment</url-pattern>
+        <url-pattern>/DeleteComment</url-pattern>
+        <url-pattern>/UpdateComment</url-pattern>
+        <url-pattern>/CreateNews</url-pattern>
+        <url-pattern>/CreateNewsForUser</url-pattern>
+        <url-pattern>/DeleteNews</url-pattern>
+        <url-pattern>/ListNews</url-pattern>
+        <url-pattern>/NewsHistory</url-pattern>
+        <url-pattern>/UpdateNewsForUser</url-pattern>
+        <url-pattern>/UpdateNews</url-pattern>
+        <url-pattern>/CreateUser</url-pattern>
+        <url-pattern>/DeleteUser</url-pattern>
+        <url-pattern>/SearchUser</url-pattern>
+        <url-pattern>/UpdateAvatar</url-pattern>
+        <url-pattern>/UpdateProfile</url-pattern>
+        <url-pattern>/UpdateUser</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/Admin</url-pattern>
+        <url-pattern>/CreateCategory</url-pattern>
+        <url-pattern>/DeleteCategory</url-pattern>
+        <url-pattern>/ListCategories</url-pattern>
+        <url-pattern>/UpdateCategory</url-pattern>
+        <url-pattern>/CreateNews</url-pattern>
+        <url-pattern>/DeleteNews</url-pattern>
+        <url-pattern>/UpdateNews</url-pattern>
+        <url-pattern>/ListNews</url-pattern>
+    </filter-mapping>
 </web-app>

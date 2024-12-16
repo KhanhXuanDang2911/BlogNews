@@ -23,7 +23,7 @@ public class DeleteNews extends HttpServlet {
             User user = (User) request.getSession().getAttribute("user");
             News news = newsBO.getListNews(id_news, null, 0, null, null).get(0);
             if (user.getRole().name().equalsIgnoreCase("USER") && news.getAuthor().getId() != (user.getId())) {
-                response.sendRedirect( request.getContextPath() + "/homepage"); // filter -> not found
+                response.sendRedirect( request.getContextPath() + "//ERROR404/index.jsp"); // filter -> not found
                 return;
             }
             boolean check = newsBO.deleteNews(id_news);

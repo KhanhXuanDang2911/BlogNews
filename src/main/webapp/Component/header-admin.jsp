@@ -32,9 +32,9 @@
     <div class="sidebar_user_info">
         <div class="icon_setting"></div>
         <div class="user_profle_side">
-            <div class="user_img"><img class="img-user-dashboard" src="../img/user_img.jpg" alt="#"></div>
+            <div class="user_img"><img class="img-user-dashboard" src="<%=request.getContextPath()%>/${sessionScope.user.avatar}" alt="#"></div>
             <div class="user_info">
-                <h6>John David</h6>
+                <h6>${sessionScope.user.name}</h6>
                 <p><span class="online_animation"></span> Online</p>
             </div>
         </div>
@@ -53,6 +53,10 @@
             </li>
             <li>
                 <a href="${pageContext.request.contextPath}/ListCategories" class="nav__link"><i class="fa-solid fa-book"></i>Categories</a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/homepage" class="nav__link"><i class="fa-solid fa-house"></i>Home</a>
+            </li>
             <li>
                 <a href="${pageContext.request.contextPath}/Logout" class="nav__link"><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
             </li>
