@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class DBContext {
     protected Connection connection;
     public DBContext(){
-        final String URL = "jdbc:mysql://localhost:3306/news";
+        final String URL = "jdbc:mysql://localhost:3306/blognews1";
         final String USERNAME = "root";
-        final String PASSWORD = "123456";
+        final String PASSWORD = "291104";
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
