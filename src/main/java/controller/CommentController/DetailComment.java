@@ -6,30 +6,31 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.bean.Comment;
 import model.bo.CommentBO;
 
 import java.io.IOException;
-@WebServlet("/UpdateComment")
-public class UpdateComment extends HttpServlet {
+
+@WebServlet("/ContentOfComment")
+public class DetailComment extends HttpServlet {
+
     private CommentBO commentBO = new CommentBO();
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            Comment updatedComment = objectMapper.readValue(request.getReader(), Comment.class);
+            int commentId = Integer.parseInt(request.getParameter("id"));
 
-            boolean isSuccess = commentBO.updateComment(updatedComment);
+            String comment = commentBO.getContentOfCommentById(commentId);
 
             ResponseAPI responseAPI;
-            if (isSuccess) {
-                responseAPI = new ResponseAPI("success", "Comment updated successfully!", null);
+            if (comment != null) {
+                responseAPI = new ResponseAPI("success", "Comment retrieved successfully!", comment);
             } else {
-                responseAPI = new ResponseAPI("error", "Update comment failed!", null);
+                responseAPI = new ResponseAPI("error", "Comment not found!", null);
             }
 
             String jsonResponse = objectMapper.writeValueAsString(responseAPI);

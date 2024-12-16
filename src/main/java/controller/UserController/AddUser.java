@@ -51,6 +51,6 @@ public class AddUser extends HttpServlet {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-        response.sendRedirect("/SearchUser");
+        response.sendRedirect(request.getContextPath() + "/ListUser");
     }
 }

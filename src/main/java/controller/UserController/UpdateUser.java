@@ -16,7 +16,7 @@ public class UpdateUser extends HttpServlet {
     UserBO userBO = new UserBO();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userIdParam = request.getParameter("userId");
+        String userIdParam = request.getParameter("id");
         try {
             long userId = Long.parseLong(userIdParam);
             User userCurrent = userBO.findUserById(userId);
@@ -24,7 +24,7 @@ public class UpdateUser extends HttpServlet {
             request.getRequestDispatcher("Users/Update.jsp").forward(request, response);
         }catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("/SearchUser");
+            response.sendRedirect(request.getContextPath() + "/ListUser");
         }
     }
 
@@ -35,7 +35,7 @@ public class UpdateUser extends HttpServlet {
             String password = request.getParameter("password");
             String name = request.getParameter("name");
             String role = request.getParameter("role");
-            boolean isActive = Boolean.parseBoolean(request.getParameter("is_active"));
+            boolean isActive = Boolean.parseBoolean(request.getParameter("status"));
             String avatar = request.getParameter("avatar");
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
@@ -53,6 +53,6 @@ public class UpdateUser extends HttpServlet {
             e.printStackTrace();
         }
 
-        response.sendRedirect("/users");
+        response.sendRedirect(request.getContextPath() + "/ListUser");
     }
 }

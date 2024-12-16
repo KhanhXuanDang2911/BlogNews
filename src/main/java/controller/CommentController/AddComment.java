@@ -1,5 +1,6 @@
 package controller.CommentController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,26 +11,39 @@ import model.bean.Comment;
 import model.bo.CommentBO;
 
 import java.io.IOException;
-import java.util.Date;
 
 @WebServlet("/AddComment")
 public class AddComment extends HttpServlet {
-    private CommentBO commentBO = new CommentBO();
+    private final CommentBO commentBO = new CommentBO();
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try{
-            int id_news = Integer.parseInt(request.getParameter("id-news"));
-            String content = request.getParameter("content");
-            Comment comment = new Comment(0, (User) request.getSession().getAttribute("user"), id_news, content, new Date());
-            boolean check = commentBO.addComment(comment);
-            if (check){
-                response.sendRedirect(request.getContextPath() + "/NewsDetail?id_news=" + id_news);
-            }else{
-                String message = "Comment failed!";
-                response.sendRedirect(request.getContextPath() + "/NewsDetail?id_news=" + id_news + "&message=" + message);
-            }
-        }catch (Exception e){
-            response.sendRedirect(request.getContextPath() + "/homepage");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        try {
+            Comment newCmt = objectMapper.readValue(request.getReader(), Comment.class);
+
+            newCmt.setAuthor((User) request.getSession().getAttribute("user"));
+
+            Long newCmtId = commentBO.addComment(newCmt);
+
+            ResponseAPI responseAPI = new ResponseAPI(
+                    newCmtId != null ? "success" : "error",
+                    newCmtId != null ? "Comment added successfully!" : "Comment failed!",
+                    newCmtId
+            );
+
+            String jsonResponse = objectMapper.writeValueAsString(responseAPI);
+            response.getWriter().write(jsonResponse);
+
+        } catch (Exception e) {
+            ResponseAPI apiResponse = new ResponseAPI("error", "An error occurred!", null);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+
+            String jsonResponse = objectMapper.writeValueAsString(apiResponse);
+            response.getWriter().write(jsonResponse);
             e.printStackTrace();
         }
     }

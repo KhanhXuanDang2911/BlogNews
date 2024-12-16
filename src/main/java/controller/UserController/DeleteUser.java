@@ -13,9 +13,9 @@ import java.io.IOException;
 public class DeleteUser extends HttpServlet {
     private UserBO userBO = new UserBO();
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            long userId = Long.parseLong(request.getParameter("userId"));
+            long userId = Long.parseLong(request.getParameter("id"));
 
             boolean isSuccess = userBO.deleteUser(userId);
             if (isSuccess) {
@@ -27,6 +27,6 @@ public class DeleteUser extends HttpServlet {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-        response.sendRedirect("/SearchUser");
+        response.sendRedirect(request.getContextPath() + "/ListUser");
     }
 }

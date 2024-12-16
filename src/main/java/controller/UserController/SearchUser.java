@@ -11,7 +11,7 @@ import model.bo.UserBO;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/SearchUser")
+@WebServlet("/ListUser")
 public class SearchUser extends HttpServlet {
     private UserBO userBO = new UserBO();
 
@@ -19,7 +19,6 @@ public class SearchUser extends HttpServlet {
         try {
             String searchName = request.getParameter("name");
             List<User> users = userBO.searchUser(searchName);
-
             request.setAttribute("users", users);
         } catch (Exception e) {
             e.printStackTrace();

@@ -15,7 +15,7 @@ public class CommentDAO extends DBContext{
     public List<Comment> getCommentByIdNews(int id_news){
         List<Comment> listComments = new ArrayList<Comment>();
         String sql = "SELECT * FROM comment as c join user as u on c.user_id = u.id " +
-                "\nWHERE article_id = " + id_news;
+                "\nWHERE article_id = " + id_news + " ORDER BY createdAt DESC";
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
@@ -34,20 +34,29 @@ public class CommentDAO extends DBContext{
         return listComments;
     }
 
-    public boolean addComment(Comment comment){
+    public Long addComment(Comment comment) {
         String sql = "insert into comment (user_id, article_id, content, createdAt) values(?, ?, ?, ?)";
-        try{
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setLong(1, comment.getAuthor().getId());
             preparedStatement.setInt(2, comment.getNews_id());
             preparedStatement.setString(3, comment.getContent());
             preparedStatement.setDate(4, new Date(comment.getCreated_at().getTime()));
-            return preparedStatement.executeUpdate() > 0;
-        }catch (Exception e){
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows > 0) {
+                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    return generatedKeys.getLong(1);
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
+
 
     public boolean deleteComment(int id){
         String sql = "delete from comment where id = ?";
@@ -72,5 +81,19 @@ public class CommentDAO extends DBContext{
             e.printStackTrace();
         }
         return false;
+    }
+
+    public String getContentOfCmt(int id){
+        String sql = "select * from comment where id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()){
+                return rs.getString("content");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

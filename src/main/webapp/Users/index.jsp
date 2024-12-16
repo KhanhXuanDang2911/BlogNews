@@ -1,12 +1,15 @@
-
+<%@ page import="model.bean.User" %>
+<%@ page import="java.util.*" %>
+<%@ page import="model.bean.enums.Role" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../Component/header-admin.jsp"/>
 <div class="content-admin">
     <div class="manage-users">
         <div class="manage-user__block-title manage-block">
             <h1 class="manage-user__title title">Manage Users</h1>
-            <a href="../html/add-users.html" class="btn-dashboard btn__add-users"><i
-                    class="fa-solid fa-plus"></i>Add new user</a>
+            <a href="<%= request.getContextPath() %>/CreateUser" class="btn-dashboard btn__add-users">
+                <i class="fa-solid fa-plus"></i>Add new user
+            </a>
         </div>
         <div class="table">
             <table class="custom-table table__users">
@@ -22,19 +25,37 @@
                 </tr>
                 </thead>
                 <tbody>
+                <%
+                    List<User> listUsers;
+                    listUsers = (List<User>) request.getAttribute("users");
+                    if (listUsers != null && !listUsers.isEmpty()) {
+                        for (User user : listUsers) {
+                %>
                 <tr>
-                    <td>US123</td>
-                    <td>Đặng Xuân Khánh</td>
-                    <td>0912312412</td>
-                    <td>caubesuuca123@gmail.com</td>
-                    <td>xuankhanh2911</td>
-                    <td>Admin</td>
-                    <td><a href="../html/update-users.html"><i class="fa-solid fa-pen"></i></a>
+                    <td><%= user.getId() %></td>
+                    <td>
+                        <%= user.getName() %>
                     </td>
 
-                    <!-- ------------------------------------->
+                    <td><%= user.getPhone() ==  null ? "Chưa cập nhật" : user.getPhone()%></td>
+                    <td><%= user.getEmail() ==  null ? "Chưa cập nhật" : user.getEmail()%></td>
+                    <td><%= user.getUsername() %></td>
+                    <td><%= user.getRole() ==  Role.USER ? "User" : "Admin" %></td>
+                    <td>
+                        <a href="<%= request.getContextPath() %>/UpdateUser?id=<%= user.getId() %>" title="Update user">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                        <a href="<%= request.getContextPath() %>/DeleteUser?id=<%= user.getId() %>"
+                           title="Delete user"
+                           onclick="return confirmDelete()">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </td>
                 </tr>
-
+                <%
+                        }
+                    }
+                %>
                 </tbody>
             </table>
             <div class="clearfix">
@@ -52,6 +73,10 @@
         </div>
     </div>
 </div>
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this user?");
+    }
+</script>
 </body>
-
 </html>

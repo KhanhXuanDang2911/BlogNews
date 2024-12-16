@@ -83,16 +83,14 @@ public class UserDAO extends DBContext {
     }
 
     public boolean updateUser(User user) {
-        String sql = "UPDATE user SET password = ?, name = ?, phone = ?, email = ?, role = ?, is_active = ?, avatar = ? WHERE id = ?";
+        String sql = "UPDATE user SET name = ?, phone = ?, email = ?, role = ?, is_active = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, user.getPassword());
-            stmt.setString(2, user.getName());
-            stmt.setString(3, user.getPhone());
-            stmt.setString(4, user.getEmail());
-            stmt.setString(5, user.getRole().toString());
-            stmt.setBoolean(6, user.isActive());
-            stmt.setString(7, user.getAvatar());
-            stmt.setLong(8, user.getId());
+            stmt.setString(1, user.getName());
+            stmt.setString(2, user.getPhone());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getRole().toString());
+            stmt.setBoolean(5, user.isActive());
+            stmt.setLong(6, user.getId());
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0; // Return true if at least one record was updated

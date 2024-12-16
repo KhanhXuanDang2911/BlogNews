@@ -1,5 +1,6 @@
 package model.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import model.bean.User;
 
 import java.util.Date;
@@ -11,6 +12,7 @@ public class Comment {
 
     int news_id;
     String content;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     Date created_at;
 
     public Comment(int id, User author, int news_id, String content, Date created_at) {
@@ -20,6 +22,8 @@ public class Comment {
         this.content = content;
         this.created_at = created_at;
     }
+
+    public Comment(){}
 
     public Comment(int id, String content) {
         this.id = id;

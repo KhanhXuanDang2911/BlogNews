@@ -46,7 +46,7 @@
     <nav class="side-bar__nav">
         <ul>
             <li>
-                <a href="${pageContext.request.contextPath}/Users" class="nav__link"><i class="fa-solid fa-user"></i>Users</a>
+                <a href="${pageContext.request.contextPath}/ListUser" class="nav__link"><i class="fa-solid fa-user"></i>Users</a>
             </li>
             <li>
                 <a href="${pageContext.request.contextPath}/ListNews" class="nav__link"><i class="fa-solid fa-file"></i>News</a>

@@ -8,6 +8,9 @@ import java.util.Set;
 
 public class NotFoundFilter implements Filter {
     private static final Set<String> VALID_URLS = Set.of(
+            "/Css",
+            "/Javascript",
+            "/lib",
             "/Images",
             "/Admin",
             "/ChangePassword",
@@ -32,13 +35,11 @@ public class NotFoundFilter implements Filter {
             "/NewsDetail",
             "/CreateUser",
             "/DeleteUser",
-            "/SearchUser",
+            "/ListUser",
             "/UpdateAvatar",
             "/UpdateProfile",
             "/UpdateUser",
-            "/Css",
-            "/Javascript",
-            "/lib"
+            "/ContentOfComment"
     );
 
     @Override
