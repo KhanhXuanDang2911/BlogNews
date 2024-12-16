@@ -13,6 +13,7 @@ public class News {
     private Date publishedAt;
     Category category;
 
+
     public News(int id, String title, String content, User author, String status, String image, Date publishedAt, Category category) {
         this.id = id;
         this.title = title;

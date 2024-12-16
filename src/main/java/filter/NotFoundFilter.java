@@ -32,7 +32,7 @@ public class NotFoundFilter implements Filter {
             "/NewsDetail",
             "/CreateUser",
             "/DeleteUser",
-            "/SearchUser",
+            "/ListUser",
             "/UpdateAvatar",
             "/UpdateProfile",
             "/UpdateUser",

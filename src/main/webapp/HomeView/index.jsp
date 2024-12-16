@@ -148,7 +148,6 @@
                                     <small><%=news.getAuthor().getName()%></small>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <small class="ml-3"><i class="far fa-eye mr-2"></i>12345</small>
                                     <small class="ml-3"><i class="far fa-comment mr-2"></i>123</small>
                                 </div>
                             </div>
@@ -193,10 +192,30 @@
                         <div class="d-flex flex-wrap m-n1">
                             <%
                                 for (Category category : listCategories) { %>
-                                    <a href="<%=request.getContextPath()%>/homepage?category_id=<%=category.getId()%>" class="btn btn-sm btn-outline-secondary m-1"
+                                    <a data-category-id="<%=category.getId()%>" href="<%=request.getContextPath()%>/homepage?category_id=<%=category.getId()%>" class="btn btn-sm btn-outline-secondary m-1 category-link"
                                     style="text-transform: capitalize"><%=category.getName()%></a>
                             <% } %>
                             <a href="<%=request.getContextPath()%>/homepage" class="btn btn-sm btn-outline-secondary m-1">All</a>
+                            <style>
+                                .active{
+                                    color: white;
+                                    background: #31404B;
+                                }
+                            </style>
+                            <script>
+                                const urlParams = new URLSearchParams(window.location.search);
+                                const categoryIdFromUrl = urlParams.get('category_id');
+
+                                const categoryLinks = document.querySelectorAll('.category-link');
+
+                                categoryLinks.forEach(link => {
+                                    const categoryId = link.getAttribute('data-category-id');
+
+                                    if (categoryId === categoryIdFromUrl) {
+                                        link.classList.add('active');
+                                    }
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>
