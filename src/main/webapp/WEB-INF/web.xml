@@ -58,7 +58,6 @@
         <url-pattern>/ListCategories</url-pattern>
         <url-pattern>/UpdateCategory</url-pattern>
         <url-pattern>/CreateNews</url-pattern>
-        <url-pattern>/DeleteNews</url-pattern>
         <url-pattern>/UpdateNews</url-pattern>
         <url-pattern>/ListNews</url-pattern>
     </filter-mapping>
