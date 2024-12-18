@@ -7,7 +7,7 @@
             <h1 class="manage-user__title title">Add New Users</h1>
         </div>
         <div class="add-user add-block">
-            <form class="add-user__form add-form" action="<%= request.getContextPath() %>/CreateUser" method="post">
+            <form class="add-user__form add-form" action="<%= request.getContextPath() %>/CreateUser" method="post" enctype="multipart/form-data">
                 <div class="add-form__content">
                     <div class="name">
                         <label for="Name">Name</label>
@@ -44,10 +44,11 @@
                                 <option value="ADMIN">Admin</option>
                             </select>
                         </div>
-                        <div class="empty">
+                        <div class="image">
+                            <label for="image-news">Image</label>
+                            <input type="file" name="image" id="image-news" placeholder="Choose image news" required>
                         </div>
                     </div>
-
                     <div class="submit">
                         <input type="submit" value="Confirm">
                         <a href="./manage-user.html" class="btn__back">Back</a>

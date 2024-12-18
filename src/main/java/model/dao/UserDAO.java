@@ -83,14 +83,15 @@ public class UserDAO extends DBContext {
     }
 
     public boolean updateUser(User user) {
-        String sql = "UPDATE user SET name = ?, phone = ?, email = ?, role = ?, is_active = ? WHERE id = ?";
+        String sql = "UPDATE user SET name = ?, phone = ?, email = ?, role = ?, is_active = ?, avatar = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getPhone());
             stmt.setString(3, user.getEmail());
             stmt.setString(4, user.getRole().toString());
             stmt.setBoolean(5, user.isActive());
-            stmt.setLong(6, user.getId());
+            stmt.setString(6, user.getAvatar());
+            stmt.setLong(7, user.getId());
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0; // Return true if at least one record was updated
@@ -101,13 +102,26 @@ public class UserDAO extends DBContext {
     }
 
     public boolean updateProfile(User user) {
-        String sql = "UPDATE user SET name = ?, phone = ?, email = ?, avatar = ? WHERE id = ?";
+        String sql = "UPDATE user SET name = ?, phone = ?, email = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getPhone());
             stmt.setString(3, user.getEmail());
-            stmt.setString(4, user.getAvatar());
-            stmt.setLong(5, user.getId());
+            stmt.setLong(4, user.getId());
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0; // Return true if at least one record was updated
+        } catch (SQLException e) {
+            System.out.println("Error updating user profile: " + e.getMessage());
+        }
+        return false; // Return false if no records were updated or an error occurred
+    }
+
+    public boolean updateAvatar(User user) {
+        String sql = "UPDATE user SET avatar = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, user.getAvatar());
+            stmt.setLong(2, user.getId());
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0; // Return true if at least one record was updated

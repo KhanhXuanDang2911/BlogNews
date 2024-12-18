@@ -86,7 +86,7 @@
                                 <p class="content-comment-in-list"><%=comment.getContent()%></p>
 
                                 <!-- Buttons for Edit and Delete -->
-                                <% if ((userSession != null && userSession.getId() == comment.getAuthor().getId()) || userSession.getRole().name().equalsIgnoreCase("ADMIN")) {%>
+                                <% if ((userSession != null && userSession.getId() == comment.getAuthor().getId()) || (userSession != null && userSession.getRole().name().equalsIgnoreCase("ADMIN"))) {%>
                                 <button class="btn btn-sm btn-warning" onclick="loadFormUpdate(<%=comment.getId()%>)">
                                     <i class="fas fa-edit"></i> Edit
                                 </button>
@@ -117,11 +117,11 @@
                             <input type="hidden" name="id-news" readonly value="<%=news.getId()%>">
                             <div class="form-group">
                                 <label for="message">Message *</label>
-                                <textarea id="message" name="content" cols="30" rows="5" class="form-control text-area-add"></textarea>
+                                <textarea id="message" name="content" cols="30" rows="5" class="form-control text-area-add"  <%if(userSS == null){%> disabled <%}%>></textarea>
                             </div>
                             <div class="form-group mb-0">
                                 <input type="submit" value="Leave a comment"
-                                       class="btn btn-primary font-weight-semi-bold py-2 px-3">
+                                       class="btn btn-primary font-weight-semi-bold py-2 px-3" <%if(userSS == null){%> disabled <%}%>>
                             </div>
                         </form>
                     </div>

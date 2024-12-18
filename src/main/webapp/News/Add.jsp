@@ -41,7 +41,7 @@
                         </select>
                     </div>
                     <div class="image">
-                        <label for="image-news">Category</label>
+                        <label for="image-news">Image</label>
                         <input type="file" name="image" id="image-news" placeholder="Choose image news" required>
                     </div>
                     <div class="submit">

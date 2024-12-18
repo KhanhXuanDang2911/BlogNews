@@ -9,7 +9,7 @@
             <h1 class="manage-user__title title">Update User</h1>
         </div>
         <div class="add-user add-block">
-            <form class="add-user__form add-form" action="<%= request.getContextPath() %>/UpdateUser" method="post">
+            <form class="add-user__form add-form" action="<%= request.getContextPath() %>/UpdateUser" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="userId" id="userId" value="<%= user.getId() %>">
 
                 <div class="add-form__content">
@@ -39,14 +39,23 @@
                         </div>
 
                         <div class="status">
-                            <label for="Status">Status</label>
-                            <select name="is_active" id="Status">
+                            <label for="statuss">Status</label>
+                            <select name="status" id="statuss">
                                 <option value="true" <%= user.isActive() ? "selected" : "" %>>Active</option>
                                 <option value="false" <%= !user.isActive() ? "selected" : "" %>>Inactive</option>
                             </select>
                         </div>
                     </div>
-
+                    <%if(user.getAvatar() != null){%>
+                    <div class="image">
+                        <input type="hidden" value="<%=user.getAvatar()%>" name="image-old">
+                        <a href="<%=request.getContextPath()%><%=user.getAvatar()%>" style="color: #15283c;font-style: italic;" target="_blank">Avatar current</a>
+                    </div>
+                    <%}%>
+                    <div class="image">
+                        <label for="image-news"><%if(user.getAvatar() == null){%>Add avatar<%}else {%> Apdate Avatar<%}%></label>
+                        <input type="file" name="image" id="image-news" placeholder="Choose image news">
+                    </div>
                     <div class="submit">
                         <input type="submit" value="Confirm">
                         <a href="./manage-user.html" class="btn__back">Back</a>

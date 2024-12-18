@@ -34,7 +34,7 @@ public class UpdateAvatar extends HttpServlet {
             String fileName = request.getServletContext().getRealPath(filePath);
             avatar.write(fileName);
         } else {
-            filePath = user.getAvatar();
+            filePath = request.getParameter("old-image");
         }
         User userFromDB = userBO.findUserById(id);
         userFromDB.setAvatar(filePath);

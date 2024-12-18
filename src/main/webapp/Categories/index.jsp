@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="id-category">
-                                            <label for="id-update">Name Category</label>
+                                            <label for="id-update">Id Category</label>
                                             <input type="text" name="id" id="id-update"
                                                    placeholder="Enter name category" readonly value="<%=category.getId()%>">
                                         </div>

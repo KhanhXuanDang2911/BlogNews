@@ -1,17 +1,19 @@
 package controller.UserController;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import model.bean.User;
 import model.bean.enums.Role;
 import model.bo.UserBO;
 import util.MD5;
 
 import java.io.IOException;
-
+@MultipartConfig
 @WebServlet("/CreateUser")
 public class AddUser extends HttpServlet {
     private UserBO userBO = new UserBO();
@@ -27,8 +29,12 @@ public class AddUser extends HttpServlet {
         String name = request.getParameter("name");
         String role = request.getParameter("role");
         boolean isActive = true;
-        String avatar = request.getParameter("avatar");
         String email = request.getParameter("email");
+        Part image =  request.getPart("image");
+        String filePath = "/Images/" + System.currentTimeMillis() + "_" + image.getSubmittedFileName();
+        String fileName = request.getServletContext().getRealPath(filePath);
+        System.out.println(fileName);
+        image.write(fileName);
 
         User user = new User();
         user.setUsername(username);
@@ -36,9 +42,9 @@ public class AddUser extends HttpServlet {
         user.setName(name);
         user.setRole(Role.valueOf(role));
         user.setActive(isActive);
-        user.setAvatar(avatar);
         user.setPhone(phone);
         user.setEmail(email);
+        user.setAvatar(filePath);
 
         try {
             boolean isSuccess = userBO.addUser(user);
